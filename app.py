@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+from requests.exceptions import RequestException
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
@@ -45,5 +46,11 @@ def get_pirlotv_links(keyword):
    return team_links
 
 def get_soup(url_address):
-   source = requests.get(url_address, headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}).content
+   try:
+      response = requests.get(url_address, headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'})
+      response.raise_for_status()
+      source = response.content
+   except RequestException as error:
+      print('HTTP error: ' + response.status_code)
+      source = '';
    return BeautifulSoup(source, "html.parser")
