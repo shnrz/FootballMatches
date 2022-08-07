@@ -18,14 +18,14 @@ def get_links_by_keyword(team):
    return render_template('links_page.html', team=team, rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
 
 def get_rojatv_links(keyword):
-   rojatv_soup = get_soup("https://rojatv.me/")
+   rojatv_soup = get_soup("https://rojatv.tv/")
    all_links = rojatv_soup.select("#my-table tbody tr td a")
    team_links = []
    for link in all_links:
       if link.b:
          if keyword in link.b.string:
             this_link = {
-               "url": "https://rojatv.me/" + link['href'],
+               "url": "https://rojatv.tv/" + link['href'],
                "title": link.b.string
             }
             team_links.append(this_link)
@@ -47,10 +47,16 @@ def get_pirlotv_links(keyword):
 
 def get_soup(url_address):
    try:
-      response = requests.get(url_address, headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'})
+      response = requests.get(
+         url_address,
+         headers={
+            'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'
+            },
+         timeout=10
+      )
       response.raise_for_status()
       source = response.content
-   except RequestException as error:
-      print('HTTP error: ' + response.status_code)
+   except RequestException as exc:
+      print(exc)
       source = '';
    return BeautifulSoup(source, "html.parser")
