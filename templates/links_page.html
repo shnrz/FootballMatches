@@ -20,7 +20,7 @@
    <h2>PirloTVonlineHD.com</h2>
    <ol>
       {% for link in pirlotv_links %}
-      <li><a href="{{link.url}}">{{link.title}}</a></li>
+      <li>{{link.matchname}} - <a href="{{link.url}} target="_blank">{{link.text}}</a></li>
       {% endfor %}
    </ol>
 </body>

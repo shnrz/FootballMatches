@@ -24,11 +24,7 @@ def get_rojatv_links(keyword):
    for link in all_links:
       if link.b:
          if keyword in link.b.string:
-            this_link = {
-               "url": "https://rojatv.tv/" + link['href'],
-               "title": link.b.string
-            }
-            team_links.append(this_link)
+            team_links.append(generate_link_dict(link, "https://rojatv.tv"))
    return team_links
 
 def get_pirlotv_links(keyword):
@@ -38,11 +34,7 @@ def get_pirlotv_links(keyword):
    for link in all_links:
       if link.b:
          if keyword in link.b.string:
-            this_link = {
-               "url": "https://pirlotvonlinehd.com" + link['href'],
-               "title": link.b.string
-            }
-            team_links.append(this_link)
+            team_links.append(generate_link_dict(link, "https://pirlotvonlinehd.com"))
    return team_links
 
 def get_soup(url_address):
@@ -60,3 +52,22 @@ def get_soup(url_address):
       print(exc)
       source = '';
    return BeautifulSoup(source, "html.parser")
+
+def get_clean_url(href, base_url):
+   clean_url = ""
+   if (href.startswith('http')):
+      clean_url = href
+   else:
+      clean_url = base_url
+      if (not href.startswith('/')):
+         clean_url = clean_url + "/"
+      clean_url = clean_url + href
+   return clean_url
+
+def generate_link_dict(link, baseurl):
+   this_url = get_clean_url(link['href'], baseurl)
+   this_link = {
+      "url": this_url,
+      "matchname": link.b.string,
+      "text": this_url[this_url.rfind('/'):]
+   }
