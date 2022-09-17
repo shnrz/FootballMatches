@@ -23,7 +23,7 @@ def get_rojatv_links(keyword):
    team_links = []
    for link in all_links:
       if link.b:
-         if keyword in link.b.string:
+         if keyword.lower() in link.b.string.lower():
             team_links.append(generate_link_dict(link, "https://rojatv.tv"))
    return team_links
 
@@ -33,7 +33,7 @@ def get_pirlotv_links(keyword):
    team_links = []
    for link in all_links:
       if link.b:
-         if keyword in link.b.string:
+         if keyword.lower() in link.b.string.lower():
             team_links.append(generate_link_dict(link, "https://pirlotvonlinehd.com"))
    return team_links
 
