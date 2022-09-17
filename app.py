@@ -71,3 +71,4 @@ def generate_link_dict(link, baseurl):
       "matchname": link.b.string,
       "text": this_url[this_url.rfind('/'):]
    }
+   return this_link
