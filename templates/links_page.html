@@ -11,12 +11,16 @@
 <body>
    <div class="container py-5">
       <h1>Stream links for <span style="color: red;">{{team}}</span></h1>
-      <form action="/search" method="post">
-         <div class="input-group mb-3 py-5 w-50">
-            <input type="text" class="form-control" placeholder="Team name" aria-label="Team name" aria-describedby="button-addon2" name="team-name" id="team-name">
-            <button class="btn btn-outline-secondary" type="button" id="btn-search">Search</button>
-          </div>
-      </form>
+      <div class="row">
+         <div class="col-sm-12 col-md-8 col-lg-6">
+            <form action="/search" method="post">
+               <div class="input-group mb-3 py-5">
+                  <input type="text" class="form-control" placeholder="Team name" aria-label="Team name" aria-describedby="button-addon2" name="team-name" id="team-name">
+                  <button class="btn btn-outline-secondary" type="button" id="btn-search">Search</button>
+                </div>
+            </form>
+         </div>
+      </div>
       <h2 class="mt-3">RojaTV.tv</h2>
       <ol>
          {% for link in rojatv_links %}
