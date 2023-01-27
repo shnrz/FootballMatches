@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import requests
 from requests.exceptions import RequestException
 from bs4 import BeautifulSoup
@@ -7,28 +7,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def get_barca_links():
-   rojatv_links = get_rojatv_links("Barcelona")
-   pirlotv_links = get_pirlotv_links("Barcelona")
-   return render_template('links_page.html', team="FC Barcelona", rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
+   return redirect('/search?team-name=Barcelona')
 
-@app.route("/<team>")
-def get_links_by_keyword(team):
-   rojatv_links = get_rojatv_links(team)
-   pirlotv_links = get_pirlotv_links(team)
-   return render_template('links_page.html', team=team, rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
-
-@app.route("/search", methods=['POST'])
+@app.route("/search", methods=['GET'])
 def search_team():
-   if request.method == 'POST':
-      if request.form['team-name'] != '':
-         team_name = request.form['team-name']
-         rojatv_links = get_rojatv_links(team_name)
-         pirlotv_links = get_pirlotv_links(team_name)
-         return render_template('links_page.html', team=team_name, rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
-      else:
-         rojatv_links = get_rojatv_links("Barcelona")
-         pirlotv_links = get_pirlotv_links("Barcelona")
-         return render_template('links_page.html', team="FC Barcelona", rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
+   if (request.args.get('team-name') != None):
+      team_name = request.args.get('team-name')
+   else:
+      team_name = 'Barcelona'
+   rojatv_links = get_rojatv_links(team_name)
+   pirlotv_links = get_pirlotv_links(team_name)
+   if (team_name == 'Barcelona') : team_name = 'FC Barcelona'
+   return render_template('links_page.html', team=team_name, rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
 
 def get_rojatv_links(keyword):
    rojatv_soup = get_soup("https://rojatv.tv/")
