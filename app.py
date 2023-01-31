@@ -18,7 +18,7 @@ def search_team():
    rojatv_links = get_rojatv_links(team_name)
    pirlotv_links = get_pirlotv_links(team_name)
    if (team_name == 'Barcelona') : team_name = 'FC Barcelona'
-   return render_template('links_page.html', team=team_name, rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
+   return render_template('links_page.html', team=team_name.title(), rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
 
 def get_rojatv_links(keyword):
    rojatv_soup = get_soup("https://rojatv.tv/")
