@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
-FRAME_HEIGHT = '720'
-FRAME_WIDTH = '1280'
+FRAME_HEIGHT = '576'
+FRAME_WIDTH = '1024'
 
 def getIframeTag(soup):
 
