@@ -18,7 +18,7 @@ def search_team():
    else:
       team_name = 'Barcelona'
    rojatv_links = get_rojatv_links(team_name,get_soup("https://rojatv.tv/"))
-   pirlotv_links = get_pirlotv_links(team_name,get_soup("https://pirlotvonlinehd.com"))
+   pirlotv_links = get_pirlotv_links(team_name,get_soup("https://pirlotvonlinehd.net"))
    if (team_name == 'Barcelona') : team_name = 'FC Barcelona'
    return render_template('links_page.html', team=str(team_name).title(), rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
 

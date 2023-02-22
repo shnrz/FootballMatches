@@ -10,12 +10,12 @@ def get_rojatv_links(keyword,soup):
 
 def get_pirlotv_links(keyword,soup):
    pirlotv_soup = soup
-   all_links = pirlotv_soup.select("#agendadiv table tr td a")
+   all_links = pirlotv_soup.select("#my-table tbody tr td[align=left] a")
    team_links = []
    for link in all_links:
       if link.b:
          if keyword.lower() in str(link.b.string).lower():
-            team_links.append(generate_link_dict(link, "https://pirlotvonlinehd.com"))
+            team_links.append(generate_link_dict(link, "https://pirlotvonlinehd.net"))
    return team_links
 
 def generate_link_dict(link, baseurl):
