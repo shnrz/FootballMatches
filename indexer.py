@@ -20,7 +20,7 @@ def get_pirlotvnet_links(keyword,soup):
 
 def get_pirlotvonline_links(keyword,soup):
    pirlotv_soup = soup
-   all_links = pirlotv_soup.select("#agendadiv table tbody tr td[align=left] a")
+   all_links = pirlotv_soup.select("#agendadiv table tr td[align=left] a")
    team_links = []
    for link in all_links:
       if link.b:
