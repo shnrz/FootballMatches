@@ -23,6 +23,11 @@ def getIframeTag(soup):
       frame_tag = '<iframe src="https://vikistream.com/embed2.php?player=desktop&amp;live=' + stream_id + '" style="overflow:hidden;height:' + FRAME_HEIGHT + ';width:' + FRAME_WIDTH + '" width="' + FRAME_WIDTH + '" height="' + FRAME_HEIGHT + '" scrolling="no" autoplay="yes" frameborder="0" allowfullscreen="true" allowtransparency="true" allow="autoplay, fullscreen" allowautoplay="yes" id="thatframe" webkitallowfullscreen="" mozallowfullscreen=""></iframe>'
       return frame_tag
 
+   elif (str(soup).find('<iframe id="streamIframe"') > -1):
+      print('Found streamIframe!')
+      frame_tag = soup.select('iframe#streamIframe')
+      return frame_tag
+
    else:
       print('Unable to detect known scripts :-(')
       print('Here\'s the soup:')
