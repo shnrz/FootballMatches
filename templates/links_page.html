@@ -29,7 +29,13 @@
       </ol>
       <h2 class="mt-3 text-danger-emphasis">PirloTVonlineHD.net</h2>
       <ol>
-         {% for link in pirlotv_links %}
+         {% for link in pirlotvnet_links %}
+         <li class="text-light-emphasis">{{link.matchname}} - <a class="link-info" href="/processURL?url={{link.url}}" target="_blank">{{link.text}}</a></li>
+         {% endfor %}
+      </ol>
+      <h2 class="mt-3 text-danger-emphasis">PirloTvHD.online</h2>
+      <ol>
+         {% for link in pirlotvonline_links %}
          <li class="text-light-emphasis">{{link.matchname}} - <a class="link-info" href="/processURL?url={{link.url}}" target="_blank">{{link.text}}</a></li>
          {% endfor %}
       </ol>

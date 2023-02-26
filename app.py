@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import requests
 from requests.exceptions import RequestException
 from bs4 import BeautifulSoup
-from indexer import get_rojatv_links, get_pirlotv_links
+from indexer import get_rojatv_links, get_pirlotvnet_links, get_pirlotvonline_links
 from url_processor import getIframeTag
 
 app = Flask(__name__)
@@ -18,9 +18,10 @@ def search_team():
    else:
       team_name = 'Barcelona'
    rojatv_links = get_rojatv_links(team_name,get_soup("https://rojatv.tv/"))
-   pirlotv_links = get_pirlotv_links(team_name,get_soup("https://pirlotvonlinehd.net"))
+   pirlotvnet_links = get_pirlotvnet_links(team_name,get_soup("https://pirlotvonlinehd.net"))
+   pirlotvonline_links = get_pirlotvonline_links(team_name,get_soup("https://pirlotvhd.online"))
    if (team_name == 'Barcelona') : team_name = 'FC Barcelona'
-   return render_template('links_page.html', team=str(team_name).title(), rojatv_links=rojatv_links, pirlotv_links=pirlotv_links)
+   return render_template('links_page.html', team=str(team_name).title(), rojatv_links=rojatv_links, pirlotvnet_links=pirlotvnet_links, pirlotvonline_links=pirlotvonline_links)
 
 @app.route("/processURL",methods=['GET'])
 def open_url():
